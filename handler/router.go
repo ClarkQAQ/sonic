@@ -42,7 +42,7 @@ func (s *Server) RegisterRouters() {
 			staticRouter.StaticFS("/images", gin.Dir(filepath.Join(s.Config.Sonic.AdminResourcesDir, "images"), false))
 			staticRouter.Use(middleware.NewCacheControlMiddleware(middleware.WithMaxAge(time.Hour*24*7)).CacheControl()).
 				StaticFS(consts.SonicUploadDir, gin.Dir(s.Config.Sonic.UploadDir, false))
-			staticRouter.StaticFS("/themes/", gin.Dir(s.Config.Sonic.ThemeDir, false))
+			staticRouter.StaticFS("/themes/", safeDir(s.Config.Sonic.ThemeDir, false, s.Config.Sonic.BanExtList))
 		}
 		{
 			adminAPIRouter := router.Group("/api/admin")

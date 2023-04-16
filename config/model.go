@@ -49,4 +49,5 @@ type Sonic struct {
 	TemplateDir       string `mapstructure:"template_dir"`
 	ThemeDir          string
 	AdminResourcesDir string
+	BanExtList        string `mapstructure:"ban_ext_list"`
 }

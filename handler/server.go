@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"path"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
@@ -312,4 +314,45 @@ func (s *Server) handleError(ctx *gin.Context, err error) {
 	if err != nil {
 		s.logger.Error("render error template err", zap.Error(err))
 	}
+}
+
+// copy from: gin/fs.go:12
+type safeDirFs struct {
+	fs        http.FileSystem
+	banExtMap map[string]bool
+}
+
+func safeDir(root string, listDirectory bool, banExtList string) http.FileSystem {
+	fs := http.Dir(root)
+	if listDirectory {
+		return fs
+	}
+
+	banExtArray := strings.Split(banExtList, ",")
+	banExtMap := make(map[string]bool, len(banExtArray))
+	for i := 0; i < len(banExtArray); i++ {
+		banExtMap[banExtArray[i]] = true
+	}
+
+	return &safeDirFs{fs, banExtMap}
+}
+
+func (fs safeDirFs) Open(name string) (http.File, error) {
+	if fs.banExtMap[path.Ext(name)] {
+		return nil, os.ErrNotExist
+	}
+
+	f, err := fs.fs.Open(name)
+	if err != nil {
+		return nil, err
+	}
+	return neuteredReaddirFile{f}, nil
+}
+
+type neuteredReaddirFile struct {
+	http.File
+}
+
+func (f neuteredReaddirFile) Readdir(count int) ([]os.FileInfo, error) {
+	return nil, nil
 }
