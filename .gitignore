@@ -6,5 +6,4 @@
 sonic.db
 sonic
 __debug_bin
-/resources/template/theme/
-!/resources/template/theme/default-theme-anatole
+/resources/template/theme_example/
