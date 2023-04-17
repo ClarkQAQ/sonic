@@ -1,0 +1,84 @@
+{{- define "clark/links" -}}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>友情链接 - {{ .blog_title }}</title>
+    {{ template "clark/module/head" . }}
+</head>
+
+{{ template "clark/module/style" . }}
+
+<style>
+    .introduction {
+        text-align: left;
+    }
+
+    .introduction .title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .introduction .subtitle {
+        font-size: 1rem;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .link {
+        padding: 50px;
+        margin: 0 -50px 40px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        width: 100%;
+        max-width: 860px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        {{ template "clark/module/header" .}}
+        <div class="content">
+            <div class="posts">
+                <div class="index-content framed">
+                    <div class="introduction-container">
+                        <div class="introduction">
+                            <h1 class="title">QAQ</h1>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: block;height: 1.5rem;"></div>
+                <div class="links">
+                    {{$links:=listLinks}}
+
+                    {{if $links}}
+                    {{range $link:=$links }}
+                    <div class="index-content framed" style="padding: 25px;">
+                        <div class="introduction-container" style="display: flex;">
+                            {{if $link.Logo }}
+                            <div class="avatar" style="max-width: 3rem;">
+                                <img src="{{ $link.Logo }}" style="min-height: 3rem;" />
+                            </div>
+                            {{end}}
+
+                            <div class="introduction" style="padding-left: 1rem; padding-top: 0.4rem; overflow-wrap: anywhere;">
+                                <h1 class="title" style="font-size: 1rem; font-weight: 500;"><a href="{{ $link.URL }}" style="text-decoration: none;">
+                                        {{ $link.Name }}
+                                    </a></h1>
+                                <p class="subtitle">{{$link.Description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{end}}
+                    {{end}}
+                </div>
+            </div>
+
+            {{template "clark/module/footer" .}}
+        </div>
+    </div>
+</body>
+
+</html>
+{{ end }}
