@@ -1,17 +1,25 @@
-{{- define "clark/post" -}}
+{{- define "sonic_theme_clark/post" -}}
 <!DOCTYPE html>
 <html lang="zh">
 
 <head>
     <title>{{ .post.Title }} - {{ .blog_title }}</title>
-    {{ template "clark/module/head" . }}
+    {{ template "sonic_theme_clark/module/head" . }}
 </head>
 
-{{ template "clark/module/style" . }}
+{{ template "sonic_theme_clark/module/style" . }}
+
+<style>
+    .post-content img {
+        border-radius: 8px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        margin: 25px 0;
+    }
+</style>
 
 <body>
     <div class="container">
-        {{ template "clark/module/header" .}}
+        {{ template "sonic_theme_clark/module/header" .}}
         <div class="content">
             <article class="post">
                 <h1 class="post-title"><a href="{{ .post.FullPath }}">{{ .post.Title }}</a></h1>
@@ -57,6 +65,10 @@
                     {{noescape .post.Content}}
                 </div>
 
+                <div class="comments">
+                    <div id="gitalk-container"></div>
+                </div>
+
                 {{if or .prevPost .nextPost }}
                 <div class="pagination">
                     <div class="pagination__title">
@@ -84,7 +96,7 @@
                 </div>
                 {{end}}
             </article>
-            {{template "clark/module/footer" .}}
+            {{template "sonic_theme_clark/module/footer" .}}
         </div>
     </div>
 </body>

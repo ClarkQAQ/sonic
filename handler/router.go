@@ -36,7 +36,7 @@ func (s *Server) RegisterRouters() {
 		})
 		{
 			staticRouter := router.Group("/")
-			staticRouter.StaticFS("admin", gin.Dir(s.Config.Sonic.AdminResourcesDir, false))
+			staticRouter.StaticFS(s.Config.Sonic.AdminURLPath, gin.Dir(s.Config.Sonic.AdminResourcesDir, false))
 			staticRouter.StaticFS("/css", gin.Dir(filepath.Join(s.Config.Sonic.AdminResourcesDir, "css"), false))
 			staticRouter.StaticFS("/js", gin.Dir(filepath.Join(s.Config.Sonic.AdminResourcesDir, "js"), false))
 			staticRouter.StaticFS("/images", gin.Dir(filepath.Join(s.Config.Sonic.AdminResourcesDir, "images"), false))
@@ -228,6 +228,7 @@ func (s *Server) RegisterRouters() {
 					photoRouter.GET("/:id", s.wrapHandler(s.PhotoHandler.GetPhotoByID))
 					photoRouter.DELETE("/:id", s.wrapHandler(s.PhotoHandler.DeletePhoto))
 					photoRouter.POST("", s.wrapHandler(s.PhotoHandler.CreatePhoto))
+					photoRouter.POST("/batch", s.wrapHandler(s.PhotoHandler.CreatePhotoBatch))
 					photoRouter.PUT("/:id", s.wrapHandler(s.PhotoHandler.UpdatePhoto))
 					photoRouter.GET("/teams", s.wrapHandler(s.PhotoHandler.ListPhotoTeams))
 				}

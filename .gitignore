@@ -3,6 +3,7 @@
 .DS_Store
 /upload
 /.vscode
+/releases
 sonic.db
 sonic
 __debug_bin

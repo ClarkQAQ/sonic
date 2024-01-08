@@ -16,10 +16,9 @@ settings:
             label: 版权信息 (支持 HTML)
             type: textarea
             default: >
-                <span>© 2023 Clark - Powered by <a href="https://github.com/go-sonic/sonic" target="_blank"
-                        rel="noopener">Sonic</a></span>
-                <span><a href="https://github.com/panr/hugo-theme-hello-friend" target="_blank">Theme</a> made by <a
-                        href="https://github.com/panr" target="_blank">panr</a></span>
+                <span>© 2023 Clark - 本博客由 <a href="https://github.com/go-sonic/sonic" target="_blank"
+                        rel="noopener">Sonic</a> 强力驱动</span>
+                <span><a href="https://github.com/panr/hugo-theme-hello-friend" target="_blank">主题来源</a></span>
         cat_full_text:
             name: cat_full_text
             label: 阅读全文文字
@@ -54,3 +53,18 @@ settings:
                   label: 开启
                 - value: false
                   label: 关闭
+        journals_alias:
+            name: journals_alias
+            label: 日志别名
+            type: text
+            default: "碎碎念"
+        links_alias:
+            name: links_alias
+            label: 友链别名
+            type: text
+            default: "友链"
+        topped_alias:
+            name: topped_alias
+            label: 置顶别名
+            type: text
+            default: "[置顶]"

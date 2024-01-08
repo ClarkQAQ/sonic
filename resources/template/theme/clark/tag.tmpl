@@ -1,13 +1,13 @@
-{{- define "clark/tag" -}}
+{{- define "sonic_theme_clark/tag" -}}
 <!DOCTYPE html>
 <html lang="zh">
 
 <head>
     <title>标签: {{.tag.Name}} - {{ .blog_title }}</title>
-    {{ template "clark/module/head" .}}
+    {{ template "sonic_theme_clark/module/head" .}}
 </head>
 
-{{ template "clark/module/style" .}}
+{{ template "sonic_theme_clark/module/style" .}}
 
 <style>
     .introduction {
@@ -15,7 +15,7 @@
     }
 
     .introduction .title {
-        font-size: 3.5rem;
+        font-size: 1.5rem;
         font-weight: 700;
         margin: 0;
     }
@@ -24,13 +24,13 @@
         font-size: 1rem;
         font-weight: 400;
         margin: 0;
-        padding-left: 0.3rem;
+        padding-left: 0.1rem;
     }
 </style>
 
 <body>
     <div class="container">
-        {{ template "clark/module/header" .}}
+        {{ template "sonic_theme_clark/module/header" .}}
         <div class="content">
             <div class="posts">
                 <div class="index-content framed">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                {{ template "clark/module/post-entry" . }}
+                {{ template "sonic_theme_clark/module/post-entry" . }}
                 {{if (gt .posts.Pages 1)}}
                 {{$pagination:=(tagPostsPagination .posts.PageNum .posts.Pages 3)}}
                 <div class="pagination">
@@ -74,7 +74,7 @@
                 </div>
                 {{end}}
             </div>
-            {{template "clark/module/footer" .}}
+            {{template "sonic_theme_clark/module/footer" .}}
         </div>
     </div>
 </body>
